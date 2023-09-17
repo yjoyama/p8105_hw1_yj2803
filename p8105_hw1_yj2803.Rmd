@@ -6,26 +6,27 @@ output: github_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = F)
 ```
 
 # Problem 1
-```{r data}
+```{r data, results='hide'}
 library(moderndive)
 data("early_january_weather") # data set in moderndive library
-summary(early_january_weather)
-
-nrow(early_january_weather) # number of rows
-ncol(early_january_weather) # number of columns
-
-mean(early_january_weather$temp)
 ```
+
+The dataset "early_january_weather" contains the following variables:  
+`r ls(early_january_weather)`  
+It has `r nrow(early_january_weather)` rows and `r ncol(early_january_weather)` columns.  
+The mean temperature (temp) in this dataset is `r round(mean(early_january_weather$temp), digits = 2)`°F.
+
 
 ```{r scatter, cache=T}
 library(ggplot2)
 scatter_temp_hour <- early_january_weather %>% 
-  ggplot(aes(x=temp, y=time_hour, color=humid)) +
-  geom_point(size=3)
+  ggplot(aes(x=time_hour, y=temp, color=humid)) + # color points using the humid variable
+  geom_point(size=2) 
+scatter_temp_hour
 ```
 
 
