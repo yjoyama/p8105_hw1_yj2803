@@ -34,6 +34,14 @@ ggsave("scatter_temp_hour.pdf", plot = last_plot(), path = "/Users/yukijoyama/Li
 The scatterplot shows that temperatures fluctuate within a day and tend to increase toward mid-January.
 Humidity seems to tend to decrease as temperatures increase and increase as temperatures go down. However, a few days of generally high humidity were observed at the end of the second week of January.  
 
+# Problem 2
+```{r sample}
+df <- rnorm(10) # create a random sample of size 10 from a standard normal distribution
+df_logical <- df > 0 # a logical vector indicating if elements in df are greater then 0
+df_char <- c("1", "2", "3", "4", "5", "6", "7", "8", "9", "10") # a character vector of length 10
+df_factor <- c("A", "A", "A", "B", "B", "C", "C", "C", "C", "A") %>%
+  factor() # a factor vegtor of length 10, with 3 differenct factor levels
+```
 
 
 
