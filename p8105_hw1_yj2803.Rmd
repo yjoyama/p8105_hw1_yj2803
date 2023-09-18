@@ -35,13 +35,54 @@ The scatterplot shows that temperatures fluctuate within a day and tend to incre
 Humidity seems to tend to decrease as temperatures increase and increase as temperatures go down. However, a few days of generally high humidity were observed at the end of the second week of January.  
 
 # Problem 2
-```{r sample}
-df <- rnorm(10) # create a random sample of size 10 from a standard normal distribution
-df_logical <- df > 0 # a logical vector indicating if elements in df are greater then 0
-df_char <- c("1", "2", "3", "4", "5", "6", "7", "8", "9", "10") # a character vector of length 10
-df_factor <- c("A", "A", "A", "B", "B", "C", "C", "C", "C", "A") %>%
-  factor() # a factor vegtor of length 10, with 3 differenct factor levels
+
+## Creating a dataframe 
+```{r tidyverse, message=F}
+library(tidyverse)
 ```
 
+```{r sample, echo=T}
+df <- tibble(
+  norm_samp = rnorm(10), # create a random sample of size 10 from a standard normal distribution
+  norm_samp_log = norm_samp > 0, # a logical vector indicating if elements in df are greater then 0
+  norm_samp_char = c("Potato", "Onion", "Carrot", "Beef", "Tofu", "Shiitake", "Soysauce", "Salt", "Scallion", "Bokchoy"), # a character vector of length 10
+  norm_samp_factor = c("Vegetable", "Vegetable", "Vegetable", "Protein", "Protein", "Vegetable", "Seasoning", "Seasoning", "Vegetable", "Vegetable") %>%
+  factor() # a factor vector of length 10, with 3 different factor levels
+)
+df
+```
+
+## Mean of each variable
+
+Now, we take the mean of each variable in the above dataframe. 
+
+```{r means, echo=T}
+mean_samp <- mean(pull(df, norm_samp)) %>% 
+  print() # mean of a norm_samp in df
+
+mean_log <- mean(pull(df, norm_samp_log)) %>% 
+  print() # mean of a norm_samp_log in df
+
+mean_char <- mean(pull(df, norm_samp_char)) %>% 
+  print() # mean of a norm_samp_char in df
+
+mean_factor <- mean(pull(df, norm_samp_factor)) %>% 
+  print() # mean of a norm_samp_factor in df
+```
+
+As shown in the outputs, norm_samp and norm_samp_log returned valid means, while norm_samp_char and norm_samp_factor returned errors.  
+
+## Converting variables into numeric
+
+```{r conversion, echo=T, results='hide', warning=F}
+as.numeric(df$norm_samp_log) # logical -> numeric
+as.numeric(df$norm_samp_char) # character -> numeric
+as.numeric(df$norm_samp_factor) # factor -> numeric
+```
+
+When the as.numeric function was applied to the dataframe, the logical and factor vectors were successfully replaced by numeric values. No change was observed in the character vector.
+This is because the as.numeric function converts TRUE to 1 and FALSE to 0 for the logical vector, and returns the numeric code corresponding to the factor level for the factor vector. A numeric value cannot be assigned to a character vector unless it consists of a numeric value in character form (e.g., "1", "2", etc.). 
+
+Since there are two variables in the logical vector that can be converted to binary numbers, the mean function can return values in the proportion of TRUE (1). The mean function could not be applied for the character and factor vector in the dataframe because it is not numeric or logical. Only after successfully converting them to numeric values can the mean function be expected to return a valid value.
 
 
