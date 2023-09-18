@@ -20,13 +20,20 @@ The dataset "early_january_weather" contains the following variables:
 It has `r nrow(early_january_weather)` rows and `r ncol(early_january_weather)` columns.  
 The mean temperature (temp) in this dataset is `r round(mean(early_january_weather$temp), digits = 2)`°F.
 
-
-```{r scatter, cache=T}
+## The relationship among temperature, time in hour, and humidity
+```{r scatter, cache=T, message=F}
 library(ggplot2)
 scatter_temp_hour <- early_january_weather %>% 
   ggplot(aes(x=time_hour, y=temp, color=humid)) + # color points using the humid variable
   geom_point(size=2) 
 scatter_temp_hour
+
+ggsave("scatter_temp_hour.pdf", plot = last_plot(), path = "/Users/yukijoyama/Library/CloudStorage/GoogleDrive-jikeyu1995@gmail.com/My Drive/version_control/MS-biostats/Data Science 1/p8105_hw1_yj2803") # save the scatterplot in the working directory
 ```
+
+The scatterplot shows that temperatures fluctuate within a day and tend to increase toward mid-January.
+Humidity seems to tend to decrease as temperatures increase and increase as temperatures go down. However, a few days of generally high humidity were observed at the end of the second week of January.  
+
+
 
 
