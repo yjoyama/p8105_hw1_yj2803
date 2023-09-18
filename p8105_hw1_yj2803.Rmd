@@ -83,6 +83,6 @@ as.numeric(df$norm_samp_factor) # factor -> numeric
 When the as.numeric function was applied to the dataframe, the logical and factor vectors were successfully replaced by numeric values. No change was observed in the character vector.
 This is because the as.numeric function converts TRUE to 1 and FALSE to 0 for the logical vector, and returns the numeric code corresponding to the factor level for the factor vector. Numeric values cannot be assigned to a character vector unless it consists of a numeric value in character form (e.g., "1", "2", etc.). 
 
-Since there are two variables in the logical vector that can be converted to binary numbers, the mean function can return values in the proportion of TRUE (1). The mean function could not be applied for the character and factor vector in the dataframe because it is not numeric or logical. Only after successfully converting them to numeric values can the mean function be expected to return a valid value.
+Since there are two variables in the logical vector that can be converted to binary numbers, the mean function can return values in the proportion of TRUE (1). The mean function could not be applied for the character and factor vector in the dataframe because they are not numeric or logical. Only after successfully converting them to numeric values can the mean function be expected to return a valid value.
 
 
